@@ -3,7 +3,7 @@ import os
 
 ## import http
 from django.http import HttpResponse
-from django.contrib.gis.geoip2 import GeoIP2
+# from django.contrib.gis.geoip2 import GeoIP2
 from django.conf import settings
 
 from .models import LongToShort
@@ -25,13 +25,13 @@ def get_country_and_device(request):
     if 'mobile' in user_agent:
         device = "Mobile"
 
-    ip_address = request.META.get('REMOTE_ADDR', None)
-    if ip_address:
-        try:
-            g = GeoIP2()
-            country = g.country(ip_address)['country_name']
-        except Exception as e:
-            print(f"GeoIP2 error: {e}")
+    # ip_address = request.META.get('REMOTE_ADDR', None)
+    # if ip_address:
+    #     try:
+    #         g = GeoIP2()
+    #         country = g.country(ip_address)['country_name']
+    #     except Exception as e:
+    #         print(f"GeoIP2 error: {e}")
 
     return country, device
 
