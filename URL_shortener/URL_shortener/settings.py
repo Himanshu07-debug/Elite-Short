@@ -12,11 +12,10 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
 
 
 # Quick-start development settings - unsuitable for production
@@ -28,7 +27,15 @@ SECRET_KEY = 'django-insecure-np&4(byvb2*wg#=!6ls#)3x9vk9bzpe(mn8nkxj7vx1n=d#)pc
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['thimanshusharma.pythonanywhere.com']
+ALLOWED_HOSTS = ['thimanshusharma.pythonanywhere.com','*']
+
+# Import Config from decouple
+
+
+# Load config from .env file
+
+# Use config to get the token
+IPINFO_TOKEN = config('IPINFO_TOKEN')
 
 
 # Application definition

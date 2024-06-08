@@ -6,9 +6,13 @@ from django.http import HttpResponse
 # from django.contrib.gis.geoip2 import GeoIP2
 from django.conf import settings
 
+import requests
+
 from .models import LongToShort
 
 from URL_shortener.settings import BASE_DIR
+
+
 
 p = os.path.join(BASE_DIR, "templates")
 
@@ -18,7 +22,7 @@ def hello_world(request):
 
 # Helper function to determine country and device type
 def get_country_and_device(request):
-    country = "India"
+    country = "Unknown"
     device = "Desktop"
     user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
 
@@ -26,12 +30,18 @@ def get_country_and_device(request):
         device = "Mobile"
 
     # ip_address = request.META.get('REMOTE_ADDR', None)
-    # if ip_address:
-    #     try:
-    #         g = GeoIP2()
-    #         country = g.country(ip_address)['country_name']
-    #     except Exception as e:
-    #         print(f"GeoIP2 error: {e}")
+    # print(ip_address)
+    ip_address = '8.8.8.8'
+    print(settings.IPINFO_TOKEN)
+    if ip_address:
+        try:
+            url = f"https://ipinfo.io/{ip_address}?token={settings.IPINFO_TOKEN}"
+            response = requests.get(url)
+            data = response.json()
+            print(data)
+            country = data.get('country', 'Unknown')
+        except Exception as e:
+            print(f"IPinfo error: {e}")
 
     return country, device
 
