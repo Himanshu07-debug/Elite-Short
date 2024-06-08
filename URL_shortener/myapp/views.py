@@ -29,10 +29,9 @@ def get_country_and_device(request):
     if 'mobile' in user_agent:
         device = "Mobile"
 
-    # ip_address = request.META.get('REMOTE_ADDR', None)
+    ip_address = request.META.get('REMOTE_ADDR', None)
     # print(ip_address)
-    ip_address = '8.8.8.8'
-    print(settings.IPINFO_TOKEN)
+
     if ip_address:
         try:
             url = f"https://ipinfo.io/{ip_address}?token={settings.IPINFO_TOKEN}"
