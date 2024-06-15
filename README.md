@@ -70,7 +70,19 @@ Hosted at: [Elite-Short](http://thimanshusharma.pythonanywhere.com/)
     ```bash
     python manage.py migrate
     ```
-10. **Run the development server**:
+
+10. **Set up environment variables**:
+    ```bash
+        pip install python-decouple
+    ```
+    - Create a `.env` file in the root of your project directory.
+    - Get your IPINFO_TOKEN from [Link](https://ipinfo.io/)
+    - Add your IPInfo token to the `.env` file:
+      ```plaintext
+      IPINFO_TOKEN=your_ipinfo_token
+      ```
+    
+12. **Run the development server**:
     ```bash
     python manage.py runserver
     ```
